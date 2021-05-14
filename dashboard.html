@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        .fle-upload{
+            display: inline-flex;
+            align-items: center;
+            font-size: 15px;
+            margin-top: 6px;
+        }
+        .file-upload--input{
+            display: none;
+        }
+        .file-upload--button{
+            -webkit-appearance: none;
+            background: #009879;
+            border: 2px solid #007450;
+            border-radius: 4px;
+            outline: none;
+            padding: o.5em o.8em;
+            margin-right: 15px;
+            color: #ffffff;
+            font-size: 1em;
+            font-family: sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 6px;
+        }
+        .file-upload--button:active{
+            background: #ffffff;
+        }
+        .file-upload--label{
+            max-width: 250px;
+            font-size: 0.9em;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-bottom: 6px;
+        }
+        /* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #009879; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #f1f1f1;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #111;
+}
+
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+/* Style inputs, select elements and textareas */
+input[type=text], select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Style the label to display next to the inputs */
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #009879;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /* float:right; */
+  margin-left: 40%;
+  margin-right: 50%;
+}
+
+/* Style the container */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Floating column for labels: 25% width */
+.col-25 {
+  float: left;
+  width: 10%;
+  margin-top: 6px;
+}
+
+/* Floating column for inputs: 75% width */
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Side navigation -->
+<div class="sidenav">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+  
+  <!-- Page content -->
+  <div class="main">
+    <div class="container">
+        <form action="action_page.php">
+
+          <div class="row">
+            <div class="col-25">
+            </div>
+            <div class="col-75">
+                <div class="fle-upload">
+                    <input class="file-upload--input" type="file" name="myFile"
+                     id="myFile" multiple>
+                     <button class="file-upload--button" type="button">Choose File(s)</button>
+                     <span class="file-upload--label">No file(s) selected</span>
+                </div>
+           
+              <input type="text" id="fname" name="firstname" placeholder="Product Title..">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
+            
+            </div>
+            <div class="col-75">
+              <input type="text" id="lname" name="lastname" placeholder="Product Price..">
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-25">
+              
+            </div>
+            <div class="col-75">
+              <textarea id="subject" name="subject" placeholder="Write description.." style="height:200px"></textarea>
+            </div>
+          </div>
+          
+          <div class="row">
+            <input type="submit" value="Submit" name="submit">
+          </div>
+        </form>
+      </div>
+    
+</div>
+    <script>
+        document.querySelectorAll(`.file-upload--button`).forEach(button =>{
+            const hiddenInput = button.parentElement.querySelector(`.file-upload--input`);
+            const label = button.parentElement.querySelector(`.file-upload--label`);
+            const defaultLabelText = `No files(s) selected`;
+            
+            //set default text for label
+            label.textContent = defaultLabelText;
+            label.title = defaultLabelText;
+
+            button.addEventListener(`click`, () =>{
+                hiddenInput.click();
+
+            });
+            hiddenInput.addEventListener(`change`, () =>{
+                const fileNameList = Array.from(hiddenInput.files).map(file =>{
+                    return file.name;
+                });
+                label.textContent = fileNameList.join(`, `) || defaultLabelText;
+                label.title = label.textContent;
+            });
+        });
+    </script>
+</body>
+</html>
